@@ -6,4 +6,7 @@ export const paths = {
   contact: () => "/contact",
   signIn: () => "/sign-in",
   signUp: () => "/sign-up",
+  category: (category: string) => `/${category}`,
+  subcategory: (category: string, subcategory: string) =>
+    `/${category}/${subcategory}`,
 };
