@@ -1,15 +1,14 @@
 "use client";
-import { Category } from "@/payload-types";
 import React, { useEffect, useRef, useState } from "react";
 import CategoryDropdown from "./category-dropdown";
-import { CustomCategory } from "../types";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { ListFilterIcon } from "lucide-react";
 import CategoriesSidebar from "./categories-sidebar";
+import { CategoriesGetManyOutput } from "@/modules/categories/types";
 
 type Props = {
-  data: CustomCategory[];
+  data: CategoriesGetManyOutput;
 };
 
 const Categories = ({ data }: Props) => {
@@ -60,11 +59,7 @@ const Categories = ({ data }: Props) => {
   return (
     <div className="relative w-full">
       {/* categories sidebar */}
-      <CategoriesSidebar
-        open={isSidebarOpen}
-        onOpenChange={setIsSidebarOpen}
-        data={data}
-      />
+      <CategoriesSidebar open={isSidebarOpen} onOpenChange={setIsSidebarOpen} />
       {/* hidden div to measure all items */}
       <div
         ref={measureRef}
@@ -75,7 +70,7 @@ const Categories = ({ data }: Props) => {
           left: -9999,
         }}
       >
-        {data.map((category: CustomCategory) => (
+        {data.map((category: CategoriesGetManyOutput[1]) => (
           <div key={category.id}>
             <CategoryDropdown
               category={category}
@@ -92,15 +87,17 @@ const Categories = ({ data }: Props) => {
         onMouseLeave={() => setIsAnyHovered(false)}
         className="flex flex-nowrap items-center"
       >
-        {data.slice(0, visibleCount).map((category: CustomCategory) => (
-          <div key={category.id}>
-            <CategoryDropdown
-              category={category}
-              isActive={activeCategory === category.slug}
-              isNavigationHovered={isAnyHovered}
-            />
-          </div>
-        ))}
+        {data
+          .slice(0, visibleCount)
+          .map((category: CategoriesGetManyOutput[1]) => (
+            <div key={category.id}>
+              <CategoryDropdown
+                category={category}
+                isActive={activeCategory === category.slug}
+                isNavigationHovered={isAnyHovered}
+              />
+            </div>
+          ))}
         <div ref={viewAllRef} className="shrink-0">
           <Button
             onClick={() => setIsSidebarOpen(true)}
