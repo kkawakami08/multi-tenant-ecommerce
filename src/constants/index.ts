@@ -6,6 +6,8 @@ export const paths = {
   contact: () => "/contact",
   signIn: () => "/sign-in",
   signUp: () => "/sign-up",
+  admin: () => "/admin",
+  library: () => "/library",
   category: (category: string) => `/${category}`,
   subcategory: (category: string, subcategory: string) =>
     `/${category}/${subcategory}`,
