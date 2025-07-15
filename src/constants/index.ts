@@ -12,3 +12,5 @@ export const paths = {
   subcategory: (category: string, subcategory: string) =>
     `/${category}/${subcategory}`,
 };
+
+export const DEFAULT_LIMIT = 8;
