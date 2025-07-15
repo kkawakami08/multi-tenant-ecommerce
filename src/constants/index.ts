@@ -1,3 +1,5 @@
+import { generateTenantURL } from "@/lib/utils";
+
 export const paths = {
   home: () => "/",
   about: () => "/about",
@@ -9,6 +11,7 @@ export const paths = {
   admin: () => "/admin",
   library: () => "/library",
   category: (category: string) => `/${category}`,
+  tenants: (slug: string) => generateTenantURL(slug),
   subcategory: (category: string, subcategory: string) =>
     `/${category}/${subcategory}`,
 };
