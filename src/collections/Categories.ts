@@ -2,6 +2,10 @@ import type { CollectionConfig } from "payload";
 
 export const Categories: CollectionConfig = {
   slug: "categories",
+  admin: {
+    //when make a new product, category list defaults to showing ID of category, so use this to show name in dropdown
+    useAsTitle: "name",
+  },
   fields: [
     {
       name: "name",
