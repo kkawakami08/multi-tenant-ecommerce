@@ -5,10 +5,10 @@ import { cn } from "@/lib/utils";
 import Link from "next/link";
 import React, { useState } from "react";
 import { usePathname } from "next/navigation";
-import NavbarSidebar from "./navbar-sidebar";
 import { MenuIcon } from "lucide-react";
 import { useTRPC } from "@/trpc/client";
 import { useQuery } from "@tanstack/react-query";
+import NavbarSidebar from "./navbar-sidebar";
 
 interface NavbarItemProps {
   href: string;
