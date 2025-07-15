@@ -7,10 +7,9 @@ import { CategoriesGetManyOutput } from "@/modules/categories/types";
 type Props = {
   category: CategoriesGetManyOutput[1];
   isOpen: boolean;
-  position: { top: number; left: number };
 };
 
-const SubcategoryMenu = ({ category, isOpen, position }: Props) => {
+const SubcategoryMenu = ({ category, isOpen }: Props) => {
   if (!isOpen || !category.subcategories || category.subcategories.length === 0)
     return null;
 
@@ -18,10 +17,10 @@ const SubcategoryMenu = ({ category, isOpen, position }: Props) => {
 
   return (
     <div
-      className="fixed z-100"
+      className="absolute z-100"
       style={{
-        top: position.top,
-        left: position.left,
+        top: "100%",
+        left: 0,
       }}
     >
       {/* invisible bridge to maintain hover */}
