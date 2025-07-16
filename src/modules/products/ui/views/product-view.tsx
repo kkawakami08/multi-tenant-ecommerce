@@ -10,6 +10,22 @@ import { LinkIcon, StarIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import React, { Fragment } from "react";
+// import CartButton from "../components/cart-button";
+import dynamic from "next/dynamic";
+
+//Cart button can't use server side rendering in this case because of zustand? So using dynamic allows us to use it without ssr
+const CartButton = dynamic(
+  //doesnt work with default export in components
+  () => import("../components/cart-button").then((mod) => mod.CartButton),
+  {
+    ssr: false,
+    loading: () => (
+      <Button className="flex-1 bg-kk-lime " disabled>
+        Add to cart
+      </Button>
+    ),
+  }
+);
 
 type Props = {
   productId: string;
@@ -94,9 +110,7 @@ const ProductView = ({ productId, tenantSlug }: Props) => {
             <div className="border-t lg:border-t-0 lg:border-l h-full">
               <div className="flex flex-col gap-4 p-6 border-b">
                 <div className="flex flex-row items-center gap-2">
-                  <Button variant={"elevated"} className="flex-1 bg-kk-lime">
-                    Add to cart
-                  </Button>
+                  <CartButton productId={productId} tenantSlug={tenantSlug} />
                   <Button
                     className="size-12 "
                     variant={"elevated"}
