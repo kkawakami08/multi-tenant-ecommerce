@@ -12,6 +12,7 @@ export const paths = {
   library: () => "/library",
   category: (category: string) => `/${category}`,
   tenants: (slug: string) => generateTenantURL(slug),
+  checkout: (slug: string) => `${generateTenantURL(slug)}/checkout`,
   product: (tenantSlug: string, productId: string) =>
     `${generateTenantURL(tenantSlug)}/products/${productId}`,
   subcategory: (category: string, subcategory: string) =>
