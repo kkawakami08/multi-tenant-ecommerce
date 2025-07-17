@@ -20,8 +20,7 @@ const CheckoutView = ({ tenantSlug }: Props) => {
   const router = useRouter();
   const [states, setStates] = useCheckoutStates();
 
-  const { productIds, clearAllCarts, removeProduct, clearCart } =
-    useCart(tenantSlug);
+  const { productIds, removeProduct, clearCart } = useCart(tenantSlug);
 
   const trpc = useTRPC();
   const { data, error, isLoading } = useQuery(
