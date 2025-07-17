@@ -5,17 +5,12 @@ import React from "react";
 
 type Props = {
   total: number;
-  onCheckout: () => void;
+  onPurchase: () => void;
   isCanceled?: boolean;
-  isPending?: boolean;
+  disabled?: boolean;
 };
 
-const CheckoutSidbar = ({
-  total,
-  onCheckout,
-  isCanceled,
-  isPending,
-}: Props) => {
+const CheckoutSidbar = ({ total, onPurchase, isCanceled, disabled }: Props) => {
   return (
     <div className="border rounded-md overflow-hidden bg-white flex flex-col">
       <div className="flex items-center justify-between p-4 border-b">
@@ -25,8 +20,8 @@ const CheckoutSidbar = ({
       <div className="p-4 flex items-center justify-center">
         <Button
           variant={"elevated"}
-          disabled={isPending}
-          onClick={onCheckout}
+          disabled={disabled}
+          onClick={onPurchase}
           size={"lg"}
           className="text-base w-full text-white bg-primary hover:bg-kk-lime hover:text-primary"
         >
