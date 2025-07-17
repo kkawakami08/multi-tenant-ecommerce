@@ -12,6 +12,7 @@ import Link from "next/link";
 import React, { Fragment } from "react";
 // import CartButton from "../components/cart-button";
 import dynamic from "next/dynamic";
+import { toast } from "sonner";
 
 //Cart button can't use server side rendering in this case because of zustand? So using dynamic allows us to use it without ssr
 const CartButton = dynamic(
@@ -84,15 +85,20 @@ const ProductView = ({ productId, tenantSlug }: Props) => {
                 </Link>
               </div>
               <div className="hidden lg:flex px-6 py-4 items-center justify-center">
-                <div className="flex items-center gap-1">
-                  <StarRating rating={3} />
+                <div className="flex items-center gap-2">
+                  <StarRating rating={data.reviewRating} />
+                  <p className="text-base font-medium">
+                    {data.reviewCount} ratings
+                  </p>
                 </div>
               </div>
             </div>
             <div className="lg:hidden px-6 py-4 items-center justify-center border-b">
-              <div className="flex items-center gap-1">
-                <StarRating rating={3} />
-                <p className="text-base font-medium">{5} ratings</p>
+              <div className="flex items-center gap-2">
+                <StarRating rating={data.reviewRating} />
+                <p className="text-base font-medium">
+                  {data.reviewCount} ratings
+                </p>
               </div>
             </div>
             <div className="p-6">
@@ -119,7 +125,10 @@ const ProductView = ({ productId, tenantSlug }: Props) => {
                   <Button
                     className="size-12 "
                     variant={"elevated"}
-                    onClick={() => {}}
+                    onClick={() => {
+                      navigator.clipboard.writeText(window.location.href);
+                      toast.success("URL copied to clipboard");
+                    }}
                     disabled={false}
                   >
                     <LinkIcon />
@@ -136,8 +145,8 @@ const ProductView = ({ productId, tenantSlug }: Props) => {
                   <h3 className="text-xl font-medium">Ratings</h3>
                   <div className="flex items-center gap-x-1 font-medium">
                     <StarIcon className="size-4 fill-black" />
-                    <p>({5})</p>
-                    <p className="text-base">{5} ratings</p>
+                    <p>({data.reviewRating})</p>
+                    <p className="text-base">{data.reviewCount} ratings</p>
                   </div>
                 </div>
                 <div className="grid grid-cols-[auto_1fr_auto] gap-3 mt-4 ">
@@ -146,8 +155,13 @@ const ProductView = ({ productId, tenantSlug }: Props) => {
                       <div className="font-medium">
                         {stars} {stars === 1 ? "star" : "stars"}
                       </div>
-                      <Progress value={5} className="h-[1lh] " />
-                      <div className="font-medium">{0}%</div>
+                      <Progress
+                        value={data.ratingDistribution[stars]}
+                        className="h-[1lh] "
+                      />
+                      <div className="font-medium">
+                        {data.ratingDistribution[stars]}%
+                      </div>
                     </Fragment>
                   ))}
                 </div>
