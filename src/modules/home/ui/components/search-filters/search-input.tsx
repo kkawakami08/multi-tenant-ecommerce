@@ -41,7 +41,7 @@ const SearchInput = ({ disabled }: Props) => {
       {/* Todo add library button */}
       {session.data?.user && (
         <Button variant={"elevated"} asChild>
-          <Link href={paths.library()}>
+          <Link prefetch href={paths.library()}>
             <BookmarkCheckIcon /> Library
           </Link>
         </Button>

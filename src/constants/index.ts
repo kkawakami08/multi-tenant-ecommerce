@@ -10,6 +10,7 @@ export const paths = {
   signUp: () => "/sign-up",
   admin: () => "/admin",
   library: () => "/library",
+  productLibrary: (id: string) => `/library/${id}`,
   category: (category: string) => `/${category}`,
   tenants: (slug: string) => generateTenantURL(slug),
   checkout: (slug: string) => `${generateTenantURL(slug)}/checkout`,
